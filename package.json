@@ -1,0 +1,20 @@
+{
+  "name": "countdown",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "pr": "npx parcel index.html --open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.3",
+    "eslint": "^8.43.0",
+    "parcel": "^2.9.3"
+  },
+  "dependencies": {
+    "air-datepicker": "^3.3.5",
+    "moment": "^2.29.4"
+  }
+}

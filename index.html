@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="sass/style.sass" />
+    <title>Countdown</title>
+  </head>
+  <body>
+    <section class="countdown">
+      <div class="container">
+        <div class="countdown__wrap">
+          <h1 class="countdown__title">Рассчёт времени до события</h1>
+          <output class="countdown__text"
+            >Новый год через: 0 лет, 0 дней, 0 часов</output
+          >
+          <form class="form" action="#">
+            <label class="form__text" for="event"
+              >Введите пожалуйста название события до которого будет вестись
+              отсчёт</label
+            >
+            <input
+              class="form__text-event input"
+              type="text"
+              id="event"
+              placeholder="Новый год"
+              required
+            />
+            <label class="form__text" for="date"
+              >Выберите пожалуйста дату</label
+            >
+            <input
+              class="form__date calendar input"
+              type="text"
+              id="date"
+              required
+            />
+            <button class="form__btn btn-reset">Рассчёт</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <dialog class="modal" id="modaErrorlEmptyFields">
+      <div class="modal__wrap">
+        <button
+          class="modal__cross btn-reset"
+          onclick="window.modaErrorlEmptyFields.close();"
+        ></button>
+        <p class="modal__text">
+          Вы не ввели данные в поле/поля, пожалуйста заполните его/их перед
+          рассчётом
+        </p>
+      </div>
+    </dialog>
+    <dialog class="modal" id="modalErrorDatePast">
+      <div class="modal__wrap">
+        <button
+          class="modal__cross btn-reset"
+          onclick="window.modalErrorDatePast.close();"
+        ></button>
+        <p class="modal__text">Выберите пожалуйста дату из будущего</p>
+      </div>
+    </dialog>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
