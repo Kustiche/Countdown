@@ -49,6 +49,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows
 node_modules/
-package-lock.json
-parcel-cash/
+.parcel-cache/
 dist/
+package-lock.json

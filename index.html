@@ -19,40 +19,30 @@
               >Введите пожалуйста название события до которого будет вестись
               отсчёт</label
             >
-            <input
-              class="form__text-event input"
-              type="text"
-              id="event"
-              placeholder="Новый год"
-              required
-            />
+            <div class="form__inner-text-event">
+              <input
+                class="form__text-event input"
+                type="text"
+                id="event"
+                placeholder="Новый год"
+              />
+            </div>
             <label class="form__text" for="date"
               >Выберите пожалуйста дату</label
             >
-            <input
-              class="form__date calendar input"
-              type="text"
-              id="date"
-              required
-            />
+            <div class="form__inner-date">
+              <input class="form__date calendar input" type="text" id="date" />
+            </div>
             <button class="form__btn btn-reset">Рассчёт</button>
           </form>
         </div>
       </div>
     </section>
-    <dialog class="modal" id="modaErrorlEmptyFields">
-      <div class="modal__wrap">
-        <button
-          class="modal__cross btn-reset"
-          onclick="window.modaErrorlEmptyFields.close();"
-        ></button>
-        <p class="modal__text">
-          Вы не ввели данные в поле/поля, пожалуйста заполните его/их перед
-          рассчётом
-        </p>
-      </div>
-    </dialog>
-    <dialog class="modal" id="modalErrorDatePast">
+    <dialog
+      class="modal"
+      id="modalErrorDatePast"
+      onclick="window.modalErrorDatePast.close();"
+    >
       <div class="modal__wrap">
         <button
           class="modal__cross btn-reset"

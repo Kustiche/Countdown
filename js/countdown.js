@@ -1,8 +1,8 @@
 import moment from "moment/moment";
-import { countodwnOutput, formDate, textEvent } from "./view.js";
+import { countdownOutput, formDate, innerDate, innerTextEvent, textEvent } from "./view.js";
 
-function selectionDeclension(n, text_forms) {  
-    const moreHundreds = Math.abs(n) % 100; 
+function selectionDeclension(number, text_forms) {  
+    const moreHundreds = Math.abs(number) % 100; 
     const lessHundreds = moreHundreds % 10;
     if (moreHundreds > 10 && moreHundreds < 20) { return text_forms[2]; }
     if (lessHundreds > 1 && lessHundreds < 5) { return text_forms[1]; }
@@ -12,11 +12,19 @@ function selectionDeclension(n, text_forms) {
 
 export function countdown() {
   const isValueFormDate = formDate.value === '';
-  const isValueTextEvent = textEvent.value === '';
+  const isValueTextEvent = +textEvent.value === 0;
 
-  if (isValueFormDate || isValueTextEvent) {
-    window.modaErrorlEmptyFields.show();
+  if (isValueFormDate) {
+    innerDate.classList.add('padding-error');
+    innerTextEvent.classList.remove('padding-error');
+    return;
+  }else if(isValueTextEvent){
+    innerTextEvent.classList.add('padding-error');
+    innerDate.classList.remove('padding-error');
+    return;
   }else {
+    innerTextEvent.classList.remove('padding-error');
+    innerDate.classList.remove('padding-error');
     const enteredDate = moment(formDate.value, 'DD-MM-YYYY');
     const currentDate = moment();
     const isEnteredDate = moment(enteredDate) < moment(currentDate)
@@ -39,6 +47,6 @@ export function countdown() {
     }
     const enteredDateHours = Math.round(enteredDate.diff(currentDate, 'hours') % 24);
 
-    countodwnOutput.textContent = `${textEvent.value} через: ${enteredDateYears} ${selectionDeclension(enteredDateYears, ['год', 'года', 'лет'])}, ${enteredDateDays} ${selectionDeclension(enteredDateDays, ['день', 'дня', 'дней'])}, ${enteredDateHours} ${selectionDeclension(enteredDateHours, ['час', 'часа', 'часов'])}`;
+    countdownOutput.textContent = `${textEvent.value} через: ${enteredDateYears} ${selectionDeclension(enteredDateYears, ['год', 'года', 'лет'])}, ${enteredDateDays} ${selectionDeclension(enteredDateDays, ['день', 'дня', 'дней'])}, ${enteredDateHours} ${selectionDeclension(enteredDateHours, ['час', 'часа', 'часов'])}`;
   }
 };

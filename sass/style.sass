@@ -6,10 +6,9 @@
   font-display: swap
 
 $mine-shaft: #222222
-$mine: #333333
 $white: #FFFFFF
 $black: #000000
-$dove-gray: #636363
+$crimson: #DC1835
 
 @import "libs/normalize"
 
@@ -55,9 +54,30 @@ body
   all: unset
   padding: 5px 10px
   border-radius: 10px
-  border: 2px solid $mine-shaft
   font-size: 20px
   line-height: 22px
+
+.form__inner-date
+  line-height: 0
+  border: 2px solid $mine-shaft
+  border-radius: 10px
+
+.form__inner-text-event
+  line-height: 0
+  border: 2px solid $mine-shaft
+  border-radius: 10px
+
+.padding-error
+  border: 2px solid $crimson
+  position: relative
+  &::after
+    content: '*Заполните поле'
+    position: absolute
+    font-size: 12px
+    line-height: 12px
+    top: -15px
+    left: 0
+    color: $crimson
 
 .countdown
   padding-top: 200px
@@ -158,6 +178,3 @@ body
   &__text
     margin: 0
     text-align: center
-
-.air-datepicker
-  border-radius: 40px
