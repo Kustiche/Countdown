@@ -1,5 +1,5 @@
 import { countdown } from "./countdown.js";
-import { form, formDate, textEvent } from "./view.js";
+import { form, formDate, textPhenomen } from "./view.js";
 import AirDatepicker from 'air-datepicker';
 import 'air-datepicker/air-datepicker.css';
 
@@ -16,7 +16,7 @@ function localData() {
 
   if (isLocalStorageEnteredDate) {
     formDate.value = JSON.parse(localStorage.getItem('enteredDate'));
-    textEvent.value = JSON.parse(localStorage.getItem('textEvent'));
+    textPhenomen.value = JSON.parse(localStorage.getItem('textPhenomen'));
     countdown();
   };
 };

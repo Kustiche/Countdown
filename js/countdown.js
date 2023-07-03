@@ -1,52 +1,59 @@
 import moment from "moment/moment";
-import { countdownOutput, formDate, innerDate, innerTextEvent, textEvent } from "./view.js";
+import { countdownOutput, formDate, innerDate, innerTextPhenomen, textPhenomen } from "./view.js";
 
-function selectionDeclension(number, text_forms) {  
+function selectionDeclension(number, terms) {  
     const moreHundreds = Math.abs(number) % 100; 
     const lessHundreds = moreHundreds % 10;
-    if (moreHundreds > 10 && moreHundreds < 20) { return text_forms[2]; }
-    if (lessHundreds > 1 && lessHundreds < 5) { return text_forms[1]; }
-    if (lessHundreds == 1) { return text_forms[0]; }
-    return text_forms[2];
+    if (moreHundreds > 10 && moreHundreds < 20) { return terms[2]; }
+    if (lessHundreds > 1 && lessHundreds < 5) { return terms[1]; }
+    if (lessHundreds == 1) { return terms[0]; }
+    return terms[2];
 }
 
 export function countdown() {
   const isValueFormDate = formDate.value === '';
-  const isValueTextEvent = +textEvent.value === 0;
+  const isValueTextPhenomen = +textPhenomen.value === 0;
 
   if (isValueFormDate) {
     innerDate.classList.add('padding-error');
-    innerTextEvent.classList.remove('padding-error');
+    innerTextPhenomen.classList.remove('padding-error');
     return;
-  }else if(isValueTextEvent){
-    innerTextEvent.classList.add('padding-error');
+  }else if(isValueTextPhenomen){
+    innerTextPhenomen.classList.add('padding-error');
     innerDate.classList.remove('padding-error');
     return;
   }else {
-    innerTextEvent.classList.remove('padding-error');
+    innerTextPhenomen.classList.remove('padding-error');
     innerDate.classList.remove('padding-error');
     const enteredDate = moment(formDate.value, 'DD-MM-YYYY');
+    const formDateYears = moment(formDate.value, 'DD-MM-YYYY').year();
     const currentDate = moment();
     const isEnteredDate = moment(enteredDate) < moment(currentDate)
 
     localStorage.setItem('enteredDate', JSON.stringify(formDate.value));
-    localStorage.setItem('textEvent', JSON.stringify(textEvent.value));
+    localStorage.setItem('textPhenomen', JSON.stringify(textPhenomen.value));
 
     if (isEnteredDate) {
       window.modalErrorDatePast.show();
       return;
     };
 
-    const isLeapYear = moment(currentDate).isLeapYear();
-    const enteredDateYears = enteredDate.diff(currentDate, 'years');
-    let enteredDateDays = '';
-    if (isLeapYear) {
-      enteredDateDays = enteredDate.diff(currentDate, 'days') - (enteredDateYears * 366);
-    }else {
-      enteredDateDays = enteredDate.diff(currentDate, 'days') - (enteredDateYears * 365);
-    }
-    const enteredDateHours = Math.round(enteredDate.diff(currentDate, 'hours') % 24);
+    let isLeapYear = '';
+    let leapYears = 0;
 
-    countdownOutput.textContent = `${textEvent.value} через: ${enteredDateYears} ${selectionDeclension(enteredDateYears, ['год', 'года', 'лет'])}, ${enteredDateDays} ${selectionDeclension(enteredDateDays, ['день', 'дня', 'дней'])}, ${enteredDateHours} ${selectionDeclension(enteredDateHours, ['час', 'часа', 'часов'])}`;
+    for (let currentDateYears = moment().year(); currentDateYears <= formDateYears; currentDateYears++) {
+      isLeapYear = moment([currentDateYears]).isLeapYear();
+
+      if (isLeapYear) {
+        ++leapYears
+      }
+    };
+
+    const enteredDateYears = enteredDate.diff(currentDate, 'years');
+    const enteredDateDays = enteredDate.diff(currentDate, 'days') - (enteredDateYears * 365 + leapYears);
+    const enteredDateHours = Math.round(enteredDate.diff(currentDate, 'hours') % 24);
+    const countdownOutputContent = `${textPhenomen.value} через: ${enteredDateYears} ${selectionDeclension(enteredDateYears, ['год', 'года', 'лет'])}, ${enteredDateDays} ${selectionDeclension(enteredDateDays, ['день', 'дня', 'дней'])}, ${enteredDateHours} ${selectionDeclension(enteredDateHours, ['час', 'часа', 'часов'])}`;
+
+    countdownOutput.textContent = countdownOutputContent;
   }
 };
