@@ -84,7 +84,7 @@ eslint - https://www.npmjs.com/package/eslint,
 
 ## Лицензия
 
-Distributed under the MIT License. See [LICENSE](https://github.com/Kustiche/Countdown/blob/main/LICENSE.md) for more information.
+Распространяется по лицензии MIT. См. [ЛИЦЕНЗИЯ](https://github.com/Kustiche/Countdown/blob/main/LICENSE) для получения дополнительной информации.
 
 ## Автор
 
