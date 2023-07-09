@@ -31,11 +31,15 @@ function fillingCookie() {
   document.cookie = `namePhenomen=${textPhenomen.value}; expires=` + date.toUTCString();
 };
 
+let i = 0;
+const arrayAllCookies = document.cookie.split('; ');
+
 function getCookie() {
-  const arrayAllCookies = document.cookie.split('; ');
-  for (let i = 0; i < arrayAllCookies.length; i++) {
-    const objectElement = arrayAllCookies[i].split('=');
-    objectCookies[objectElement[0]] = objectElement[1];
+  const objectElement = arrayAllCookies[i].split('=');
+  objectCookies[objectElement[0]] = objectElement[1];
+  i++;
+  if (i > arrayAllCookies.length) {
+    getCookie();
   };
 };
 
